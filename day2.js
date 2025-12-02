@@ -25,9 +25,7 @@ function convertInput(input){
         newInput.push(
             {
                 "min" : parseInt(values[0]),
-                "minLenth" : values[0].length,
-                "max" : parseInt(values[1]),
-                "maxLength" : values[1].length
+                "max" : parseInt(values[1])
             }
         );
     }
