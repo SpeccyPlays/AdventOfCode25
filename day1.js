@@ -1,9 +1,9 @@
 /*
 Quick solution to Day 1 of Advent of Code '25
 */
-async function run1(){
+async function run1(inputFile){
   const maxValue = 99;
-  const rotations = await getInput();
+  const rotations = await getInput(inputFile);
   let currentValue = 50;
   let zeroCount = 0
   rotations.forEach(rotation => {
@@ -29,8 +29,8 @@ async function run1(){
 function printRotationAndValue(rotation, currentValue){
   console.log("The dial is rotated", rotation, "to point at", currentValue, ".");
 }
-async function getInput(){
-  let result = await fetch("day1input.txt");
+async function getInput(inputFile){
+  let result = await fetch(inputFile);
   if (result.ok){
     const uneditedInput = await result.text();
     const input = uneditedInput.split("\r\n");
