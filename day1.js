@@ -3,9 +3,10 @@ Quick solution to Day 1 of Advent of Code '25
 */
 async function run1(inputFile){
   const maxValue = 99;
-  const rotations = await getInput(inputFile);
+  const rotations = await getInput1(inputFile);
   let currentValue = 50;
-  let zeroCount = 0
+  let zeroCount = 0;
+  let part2ZeroCount = 0;
   rotations.forEach(rotation => {
     const direction = rotation.slice(0, 1);
     const value = parseInt(rotation.slice(1))
@@ -18,6 +19,9 @@ async function run1(inputFile){
       if (currentValue > maxValue){
         currentValue = 0;
       }
+      if (currentValue == 0){
+        part2ZeroCount ++;
+      }
     }
     printRotationAndValue(rotation, currentValue);
     if (currentValue === 0){
@@ -25,11 +29,12 @@ async function run1(inputFile){
     }
   })
   console.log("The password is", zeroCount);
+  console.log("Part 2 zero count is", part2ZeroCount);
 };
 function printRotationAndValue(rotation, currentValue){
   console.log("The dial is rotated", rotation, "to point at", currentValue, ".");
 }
-async function getInput(inputFile){
+async function getInput1(inputFile){
   let result = await fetch(inputFile);
   if (result.ok){
     const uneditedInput = await result.text();
