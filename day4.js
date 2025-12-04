@@ -7,24 +7,48 @@ async function run4(inputFile){
 }
 function processInput4(input){
     let canMoveCount = 0;
-    let amountOfAtAllowed = 3;
+    const atLimit = 3;
+    const adjacentAmount = 8;
     let spaces = [];
     for (let i = 0; i < input.length; i++){
         const row = input[i];
-        console.log("Row is ", row);
-        let rollCount = 0;
+        //why javascript, why?!
+        //do below as we're going to mark with x's later
+        let markerRow = row.split("");
         for (let j = 0; j < row.length; j++){
-            if (row[j] === "."){
-                spaces.push({
-                    spaceRow : i,
-                    spaceDigit : j
-                })
-                console.log("Free space", row[j], j);
+            if (row[j] === "@"){
+                let rollCountForward = 0;
+                let rollCountBack = 0;
+
+                for (let count = j; count < adjacentAmount; count ++){
+                    //check if we're at the end
+                    if (j - count < 0 || j + count > row.length || rollCountBack + rollCountForward > atLimit){
+                        break;
+                    }
+                    if (row[j + count] == "@"){
+                        rollCountForward ++;
+                    }
+                    if (row[j - count] == "@"){
+                        rollCountBack ++;
+                    }
+                }
+                if (rollCountBack + rollCountForward > atLimit){
+                    continue;
+                }
+                //check up and down
+                let rollCountUp = 0;
+                let rollCountDown = 0;
+
+                markerRow[j] = "x";
             }
         }
+        markerRow = markerRow.join("");
+        spaces.push(markerRow);
     }
-    console.log (input);
-    console.log("Spaces are", spaces);
+    spaces.forEach(space => {
+        console.log("Space", space);
+    })
+    
 }
 async function getInput4(inputFile){
   let result = await fetch(inputFile);
