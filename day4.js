@@ -11,35 +11,13 @@ function processInput4(input){
     const adjacentAmount = 8;
     let spaces = [];
     for (let i = 0; i < input.length; i++){
-        const row = input[i];
         //why javascript, why?!
         //do below as we're going to mark with x's later
         let markerRow = row.split("");
         for (let j = 0; j < row.length; j++){
-            if (row[j] === "@"){
-                let rollCountForward = 0;
-                let rollCountBack = 0;
-
-                for (let count = j; count < adjacentAmount; count ++){
-                    //check if we're at the end
-                    if (j - count < 0 || j + count > row.length || rollCountBack + rollCountForward > atLimit){
-                        break;
-                    }
-                    if (row[j + count] == "@"){
-                        rollCountForward ++;
-                    }
-                    if (row[j - count] == "@"){
-                        rollCountBack ++;
-                    }
-                }
-                if (rollCountBack + rollCountForward > atLimit){
-                    continue;
-                }
-                //check up and down
-                let rollCountUp = 0;
-                let rollCountDown = 0;
-
-                markerRow[j] = "x";
+            let rollCount = 0;
+            if (input[i][j] === "@"){
+                console.log("There's a @")
             }
         }
         markerRow = markerRow.join("");
